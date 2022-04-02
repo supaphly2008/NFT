@@ -38,7 +38,7 @@ export default function Home() {
         <hr className="my-2 border" />
         {address && (
           <p className="text-sm text-center text-rose-400">
-            You're logged in with wallet {address.substring(0, 5)}...{address.substring(address.length - 5)}
+            You are logged in with wallet {address.substring(0, 5)}...{address.substring(address.length - 5)}
           </p>
         )}
 
