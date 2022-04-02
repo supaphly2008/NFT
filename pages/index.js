@@ -46,7 +46,7 @@ export default function Home() {
         <div className="mt-10 flex flex-1 flex-col items-center space-y-6 text-center lg:space-y-0 lg:justify-center">
           <img className="w-80 object-cover pb-10 lg:h-40" src="/Azuki-wall.jpeg" alt="" />
           <h1 className="text-3xl font-bold lg:text-5xl lg:font-extrabold">The Azuki coding club | NFT Drop</h1>
-          <p className="pt-2 text-xl text-green-500">333 / 10,000 of NFT's Minted</p>
+          <p className="pt-2 text-xl text-green-500">333 / 10,000 of NFTs Minted</p>
         </div>
 
         {/* mint button */}
