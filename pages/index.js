@@ -1,7 +1,13 @@
 import { useState, useEffect } from "react";
 import { useAddress, useDisconnect, useMetamask, useNFTDrop } from "@thirdweb-dev/react";
+import toast, { Toaster } from "react-hot-toast";
 
 const collectionAddress = "0xD5bAD0df8B7449cF6dbE7a83ed55d666a08a63dd";
+
+const ERROR_CODE = {
+  4001: "User denied transaction signature",
+  "-32000": "Insufficient fund",
+};
 
 export default function Home() {
   const address = useAddress();
@@ -51,6 +57,16 @@ export default function Home() {
 
     setLoading(true);
 
+    const notification = toast.loading("Minting NFT....", {
+      style: {
+        background: "green",
+        color: "white",
+        fontWeight: "bolder",
+        fontSize: "17px",
+        padding: "20px",
+      },
+    });
+
     nftDrop
       .claimTo(address, quantity)
       .then(async (tx) => {
@@ -58,20 +74,27 @@ export default function Home() {
         const claimedTokenId = tx[0].id;
         const claimedNft = await tx[0].data();
 
+        toast.success(`You've successfully minted NFT #${claimedTokenId}`, {
+          duration: 5000,
+        });
+
         console.log("receipt", receipt);
         console.log("claimedTokenId", claimedTokenId);
         console.log("claimedNft", claimedNft);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
+        toast.error(ERROR_CODE[err.code] || "Something went wrong!");
       })
       .finally(() => {
         setLoading(false);
+        toast.dismiss(notification);
       });
   };
 
   return (
     <div className="h-screen flex flex-col lg:grid lg:grid-cols-10">
+      <Toaster position="bottom-right" />
       {/* left */}
       <div className="lg:col-span-4 bg-gradient-to-br from-cyan-800 to-rose-500">
         <div className="flex flex-col items-center justify-center py-2 lg:min-h-screen">
