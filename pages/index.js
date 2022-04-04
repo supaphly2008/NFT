@@ -59,8 +59,8 @@ export default function Home() {
 
     const notification = toast.loading("Minting NFT....", {
       style: {
-        background: "green",
-        color: "white",
+        background: "white",
+        color: "green",
         fontWeight: "bolder",
         fontSize: "17px",
         padding: "20px",
@@ -76,6 +76,13 @@ export default function Home() {
 
         toast.success(`You've successfully minted NFT #${claimedTokenId}`, {
           duration: 5000,
+          style: {
+            background: "white",
+            color: "green",
+            fontWeight: "bolder",
+            fontSize: "17px",
+            padding: "20px",
+          },
         });
 
         console.log("receipt", receipt);
@@ -84,7 +91,15 @@ export default function Home() {
       })
       .catch((err) => {
         console.error(err);
-        toast.error(ERROR_CODE[err.code] || "Something went wrong!");
+        toast.error(ERROR_CODE[err.code] || "Something went wrong!", {
+          style: {
+            background: "white",
+            color: "red",
+            fontWeight: "bolder",
+            fontSize: "17px",
+            padding: "20px",
+          },
+        });
       })
       .finally(() => {
         setLoading(false);
